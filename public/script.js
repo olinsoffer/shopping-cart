@@ -1,21 +1,34 @@
+var source = $('#cart-template').html();
+var template = Handlebars.compile(source);
 
 // an array with all of our cart items
 var cart = [];
 
 var updateCart = function () {
-  // TODO: Write this function. In this function we render the page.
-  // Meaning we make sure that all our cart items are displayed in the browser.
-  // Remember to empty the "cart div" before you re-add all the item elements.
+  let shoppingCart = $('.shopping-cart'),
+  shoppingCartList = shoppingCart.find('.cart-list'),
+  cartTotal = shoppingCart.find('.total');
+  shoppingCartList.empty();
+  total = 0;
+  for(let i = 0, l = cart.length; i<l; i++) {
+    let newHTML = template(cart[i]);
+    shoppingCartList.append(newHTML);
+    total += cart[i].price;
+  }
+  cartTotal.empty();
+  cartTotal.append(total);
 }
 
 
 var addItem = function (item) {
-  // TODO: Write this function. Remember this function has nothing to do with display. 
-  // It simply is for adding an item to the cart array, no HTML involved - honest ;-)
+  cart.push(item);
 }
 
 var clearCart = function () {
-  // TODO: Write a function that clears the cart ;-)
+  cart = [];
+  console.log($(this))
+  $('.cart-list').empty();
+  $('.total').html('0');
 }
 
 $('.view-cart').on('click', function() {
@@ -24,6 +37,7 @@ $('.view-cart').on('click', function() {
 
 $('.add-to-cart').on('click', function () {
   // TODO: get the "item" object from the page
+  item = $(this).closest('.item').data();
   addItem(item);
   updateCart();
 });
