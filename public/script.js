@@ -1,3 +1,4 @@
+
 // an array with all of our cart items
 var cart = [];
 
@@ -17,8 +18,8 @@ var clearCart = function () {
   // TODO: Write a function that clears the cart ;-)
 }
 
-$('.view-cart').on('click', function () {
-  // TODO: hide/show the shopping cart!
+$('.view-cart').on('click', function() {
+  $('.shopping-cart').toggle();
 });
 
 $('.add-to-cart').on('click', function () {
